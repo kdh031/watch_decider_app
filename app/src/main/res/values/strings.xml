@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Watch Decider</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Liked Movies</string>
+    <string name="title_notifications">Matches</string>
+    <string name="title_login">Log In</string>
+</resources>
