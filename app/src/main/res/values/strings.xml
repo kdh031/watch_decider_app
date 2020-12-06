@@ -4,4 +4,12 @@
     <string name="title_dashboard">Liked Movies</string>
     <string name="title_notifications">Matches</string>
     <string name="title_login">Log In</string>
+
+    <string name="checkbox">com.example.bottomnavigationactivityapp.ui.login.checkbox</string>
+    <string name="name">com.example.bottomnavigationactivityapp.ui.login.name</string>
+    <string name="password">com.example.bottomnavigationactivityapp.ui.password</string>
+
+
+
+
 </resources>
