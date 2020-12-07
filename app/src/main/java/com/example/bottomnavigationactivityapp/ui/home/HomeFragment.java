@@ -117,12 +117,12 @@ public class HomeFragment extends Fragment {
     }
     
     private void paginate() {
-        List<ItemModel> old = adapter.getItems();
-        List<ItemModel> baru = new ArrayList<>(addList());
-        CardStackCallback callback = new CardStackCallback(old, baru);
-        DiffUtil.DiffResult hasil = DiffUtil.calculateDiff(callback);
-        adapter.setItems(baru);
-        hasil.dispatchUpdatesTo(adapter);
+        List<ItemModel> oldItem = adapter.getItems();
+        List<ItemModel> newItem = new ArrayList<>(addList());
+        CardStackCallback callback = new CardStackCallback(oldItem, newItem);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+        adapter.setItems(newItem);
+        result.dispatchUpdatesTo(adapter);
     }
 
     private List<ItemModel> addList() {
