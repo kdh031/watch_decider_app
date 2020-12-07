@@ -30,8 +30,10 @@ import androidx.recyclerview.widget.DiffUtil;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 public class HomeFragment extends Fragment {
@@ -40,6 +42,13 @@ public class HomeFragment extends Fragment {
 
     private CardStackLayoutManager manager;
     private CardStackAdapter adapter;
+
+    private String itemName;
+    List<ItemModel> myItem;
+    private final Set<String> likedMovies = new HashSet<String>();
+    List<ItemModel> listMovies;
+
+    int i=0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +70,11 @@ public class HomeFragment extends Fragment {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right){
                     Toast.makeText(getContext(), "Direction Right", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "getTopPosition: " + manager.getTopPosition());
+                    Log.d(TAG, "Item name: " + itemName);
+
+                    addToMovieList(itemName);
+                    Log.d(TAG, "Movie List: " + likedMovies);
                 }
                 if (direction == Direction.Top){
                     Toast.makeText(getContext(), "Direction Top", Toast.LENGTH_SHORT).show();
@@ -76,6 +90,7 @@ public class HomeFragment extends Fragment {
                 if (manager.getTopPosition() == adapter.getItemCount() - 5){
                     paginate();
                 }
+
             }
 
             @Override
@@ -91,15 +106,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCardAppeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
+                itemName = tv.getText().toString();
             }
 
             @Override
             public void onCardDisappeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.item_name);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardAppeared: " + position + ", name: " + tv.getText());
             }
         });
+
         manager.setStackFrom(StackFrom.None);
         manager.setVisibleCount(3);
         manager.setTranslationInterval(8.0f);
@@ -114,8 +131,14 @@ public class HomeFragment extends Fragment {
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapter);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
+
+        //Log.d(TAG, "Liked movie: " + Arrays.toString(likedMovies));
     }
-    
+
+    private void addToMovieList(String itemName) {
+        likedMovies.add(itemName);
+    }
+
     private void paginate() {
         List<ItemModel> oldItem = adapter.getItems();
         List<ItemModel> newItem = new ArrayList<>(addList());
@@ -137,8 +160,8 @@ public class HomeFragment extends Fragment {
         items.add(new ItemModel(R.drawable.image_theirongiant, "The Iron Giant", "1999", "Description"));
         items.add(new ItemModel(R.drawable.image_yourname, "Your Name.", "2016", "Description"));
         items.add(new ItemModel(R.drawable.image_thelionking, "The Lion King", "1994", "Description"));
+        myItem = items;
         return items;
     }
-
 
 }

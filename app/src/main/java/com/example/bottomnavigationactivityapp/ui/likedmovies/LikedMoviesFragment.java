@@ -13,10 +13,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.bottomnavigationactivityapp.R;
+import com.example.bottomnavigationactivityapp.ui.home.HomeFragment;
 
 public class LikedMoviesFragment extends Fragment {
 
     private LikedMoviesViewModel likedMoviesViewModel;
+    private HomeFragment homeFragment;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,4 +34,5 @@ public class LikedMoviesFragment extends Fragment {
         });
         return root;
     }
+
 }
