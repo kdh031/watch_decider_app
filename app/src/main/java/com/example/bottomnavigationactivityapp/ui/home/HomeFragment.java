@@ -13,6 +13,8 @@ import com.example.bottomnavigationactivityapp.CardStackAdapter;
 import com.example.bottomnavigationactivityapp.CardStackCallback;
 import com.example.bottomnavigationactivityapp.ItemModel;
 import com.example.bottomnavigationactivityapp.R;
+import com.example.bottomnavigationactivityapp.ui.likedmovies.LikedMoviesFragment;
+import com.example.bottomnavigationactivityapp.ui.likedmovies.LikedMoviesViewModel;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -30,23 +32,21 @@ import androidx.recyclerview.widget.DiffUtil;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class HomeFragment extends Fragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
 
+    LikedMoviesViewModel likedMoviesViewModel = new LikedMoviesViewModel();
+
     private CardStackLayoutManager manager;
     private CardStackAdapter adapter;
 
     private String itemName;
     List<ItemModel> myItem;
-    private final Set<String> likedMovies = new HashSet<String>();
-    List<ItemModel> listMovies;
+    private final ArrayList<String> likedMovies = new ArrayList<String>();
 
     int i=0;
 
@@ -75,6 +75,9 @@ public class HomeFragment extends Fragment {
 
                     addToMovieList(itemName);
                     Log.d(TAG, "Movie List: " + likedMovies);
+                    likedMoviesViewModel.setMovieList(likedMovies);
+
+
                 }
                 if (direction == Direction.Top){
                     Toast.makeText(getContext(), "Direction Top", Toast.LENGTH_SHORT).show();
@@ -137,6 +140,10 @@ public class HomeFragment extends Fragment {
 
     private void addToMovieList(String itemName) {
         likedMovies.add(itemName);
+    }
+
+    public ArrayList<String> getMovies(){
+        return likedMovies;
     }
 
     private void paginate() {

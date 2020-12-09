@@ -2,6 +2,8 @@ package com.example.bottomnavigationactivityapp;
 
 import android.os.Bundle;
 
+import com.example.bottomnavigationactivityapp.ui.home.HomeFragment;
+import com.example.bottomnavigationactivityapp.ui.likedmovies.LikedMoviesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

@@ -13,25 +13,42 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.bottomnavigationactivityapp.R;
-import com.example.bottomnavigationactivityapp.ui.home.HomeFragment;
 
 public class LikedMoviesFragment extends Fragment {
 
+    private static final String TAG = LikedMoviesFragment.class.getSimpleName();
     private LikedMoviesViewModel likedMoviesViewModel;
-    private HomeFragment homeFragment;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         likedMoviesViewModel =
                 new ViewModelProvider(this).get(LikedMoviesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_liked_movies, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        likedMoviesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        final TextView tvLikes1 = root.findViewById(R.id.tvLikes1);
+        final TextView tvLikes2 = root.findViewById(R.id.tvLikes2);
+        final TextView tvLikes3 = root.findViewById(R.id.tvLikes3);
+
+
+        likedMoviesViewModel.getText1().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                tvLikes1.setText(s);
             }
         });
+        likedMoviesViewModel.getText2().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                tvLikes2.setText(s);
+            }
+        });
+        likedMoviesViewModel.getText3().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                tvLikes3.setText(s);
+            }
+        });
+
         return root;
     }
 
